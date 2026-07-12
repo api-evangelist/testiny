@@ -1,0 +1,167 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Testiny
+providerId: testiny
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Test Runs
+- Test Management
+- QA
+- Testing
+- Plans
+description: >-
+  Testiny is priced per user per month, billed on the whole platform rather than
+  on API calls - the REST API, CLI, and npm package are included on every plan
+  (API keys are listed as a Free-tier feature), and the MCP server requires a
+  paid or trial plan. There is a free-forever tier, three paid cloud tiers, and
+  a Custom Enterprise option that also offers self-hosting via Testiny Server.
+  Annual billing gives two months free on the paid tiers. Prices below are the
+  published monthly per-user rates as of the review date.
+notes: >-
+  Prices are per user per month (monthly billing). Annual billing advertises
+  "2 months for free" on paid tiers. Volume discounts apply at higher seat
+  counts. Verify current numbers on https://www.testiny.io/pricing/ during
+  reconciliation.
+sources:
+- https://www.testiny.io/pricing/
+- https://www.testiny.io/docs/
+- https://www.testiny.io/api/
+plans:
+- id: testiny-free
+  name: Free
+  type: free
+  description: >-
+    Free-forever tier for small teams and evaluation. Up to 3 users and a
+    combined limit of 1,000 test cases, plans, runs, and executions. Includes
+    reporting, issue-tracker integrations, API keys, and 2FA.
+  entries:
+  - label: Users
+    name: free_users
+    type: unit
+    metric: users
+    limit: 3
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '0.00'
+    userMultiplied: false
+  - label: Test Cases, Plans, Runs and Executions
+    name: free_items
+    type: usage
+    metric: items
+    limit: 1000
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: included
+    userMultiplied: false
+  elements:
+  - name: REST API and API Keys
+  - name: Reporting
+  - name: Issue-Tracker Integrations
+  - name: Two-Factor Authentication
+- id: testiny-starter
+  name: Starter
+  type: paid
+  description: >-
+    Entry paid tier for up to 25 users. Adds unlimited history, custom fields,
+    results per step, CSV/Excel export, and the MCP server, with 50 GB storage
+    (100 MB per-file upload limit).
+  entries:
+  - label: Per User
+    name: starter_seat
+    type: unit
+    metric: users
+    limit: 25
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '18.50'
+    userMultiplied: true
+  elements:
+  - name: Everything in Free
+  - name: Unlimited History
+  - name: Custom Fields
+  - name: Results Per Step
+  - name: CSV and Excel Export
+  - name: MCP Server
+  - name: 50 GB Storage
+- id: testiny-business
+  name: Business
+  type: paid
+  description: >-
+    Team tier with no user limit (from 5 users). Adds custom result states,
+    automation, milestones, SSO, and premium support, with 250 GB storage
+    (100 MB per-file upload limit).
+  entries:
+  - label: Per User
+    name: business_seat
+    type: unit
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '20.50'
+    userMultiplied: true
+  elements:
+  - name: Everything in Starter
+  - name: Custom Result States
+  - name: Automation
+  - name: Milestones
+  - name: Single Sign-On (SSO)
+  - name: Premium Support
+  - name: 250 GB Storage
+- id: testiny-enterprise
+  name: Enterprise
+  type: paid
+  description: >-
+    Enterprise tier sold in packages of 5 user seats. Adds user roles per
+    project, custom roles, permission groups, audit log, and enterprise support,
+    with 500 GB storage (100 MB per-file upload limit).
+  entries:
+  - label: Per User
+    name: enterprise_seat
+    type: unit
+    metric: users
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: 1
+    price: '30.00'
+    userMultiplied: true
+  elements:
+  - name: Everything in Business
+  - name: User Roles Per Project
+  - name: Custom Roles and Permission Groups
+  - name: Audit Log
+  - name: Enterprise Support
+  - name: 500 GB Storage
+- id: testiny-custom-enterprise
+  name: Custom Enterprise
+  type: enterprise
+  description: >-
+    Customizable agreement with invoice-based billing and a self-hosting option
+    (Testiny Server). For teams needing on-premises deployment or negotiated
+    terms. Contact Testiny.
+  entries:
+  - label: Custom Agreement
+    name: custom_enterprise
+    type: flat
+    metric: contract
+    limit: -1
+    timeFrame: year
+    geo: global
+    unit: 1
+    price: contact sales
+    userMultiplied: false
+  elements:
+  - name: Self-Hosting (Testiny Server)
+  - name: Invoice-Based Billing
+  - name: Custom Terms
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

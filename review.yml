@@ -1,0 +1,127 @@
+aid: testiny
+name: Testiny
+review:
+  question: Does Testiny expose a documented public WebSocket API?
+  answer: false
+  date: '2026-07-11'
+  reviewer: API Evangelist
+  asyncapiSpecCreated: false
+  asyncapiScopeNote: |
+    No AsyncAPI document was authored. Testiny's public API surface is a
+    request/response REST API over HTTPS (base https://app.testiny.io/api/v1),
+    authenticated with an X-Api-Key header. The live OpenAPI schema at
+    https://app.testiny.io/api/v1/swagger.json (OpenAPI 3.0.4, 124 paths) was
+    inspected and contains no WebSocket (ws/wss), Server-Sent Events, or
+    text/event-stream surface. Testiny's own AI integration - the MCP server -
+    is reached over HTTP transport at https://app.testiny.io/api-server (MCP
+    protocol 2025-06-18), not a WebSocket. There is no server-push transport on
+    Testiny's own API to model.
+findings:
+  summary: |
+    Testiny does not publish a documented public WebSocket API. Testiny is a
+    test management platform for QA teams. Its public API is a REST API (base
+    https://app.testiny.io/api/v1) authenticated with an X-Api-Key header, and
+    it publishes a live OpenAPI 3.0.4 schema (124 paths) at
+    https://app.testiny.io/api/v1/swagger.json. Every entity - project, test
+    case, test case folder, test case query, test plan, test run, and the
+    automation entities (atm-testcase, atm-testrun) - follows a consistent
+    pattern: single-item CRUD on /{entity}/{id}, POST /{entity}/find for search,
+    /{entity}/bulk for bulk create/update/delete, undelete, and
+    /{entity}/mapping/bulk/{otherEntities} for relationships. Test results are
+    recorded by mapping test cases to a run (testcase:testrun), with per-step
+    results and attachments. Everything is request/response REST. The MCP server
+    uses HTTP transport, not WebSocket. No ws:// or wss:// endpoint is documented
+    anywhere.
+  accessModel: |
+    Testiny is a per-seat SaaS with a free-forever tier (up to 3 users) and paid
+    Starter/Business/Enterprise tiers, plus a Custom Enterprise option that
+    offers self-hosting via Testiny Server. The REST API, CLI, and npm package
+    (@testiny/cli) are included on every plan (API keys are a Free-tier
+    feature); the MCP server requires a paid or trial plan. Not open source.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://app.testiny.io/api/v1
+      documented: true
+      note: Full REST API with a live OpenAPI 3.0.4 schema (swagger.json, 124 paths). X-Api-Key header auth.
+    - protocol: MCP (HTTP)
+      scheme: https
+      baseURL: https://app.testiny.io/api-server
+      documented: true
+      note: Model Context Protocol server over HTTP transport (protocol 2025-06-18). Bearer key or OAuth. Not a WebSocket.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket endpoint is documented anywhere in Testiny's REST docs or OpenAPI schema as of the review date.
+    - protocol: SSE
+      scheme: https
+      documented: false
+      note: No Server-Sent Events / text/event-stream surface is present in the OpenAPI schema.
+  endpointsConfirmedRest:
+    - GET    https://app.testiny.io/api/v1/project
+    - POST   https://app.testiny.io/api/v1/project/find
+    - GET    https://app.testiny.io/api/v1/project/{id}
+    - GET    https://app.testiny.io/api/v1/permission/me/projects
+    - GET    https://app.testiny.io/api/v1/testcase
+    - POST   https://app.testiny.io/api/v1/testcase
+    - POST   https://app.testiny.io/api/v1/testcase/find
+    - POST   https://app.testiny.io/api/v1/testcase/bulk
+    - GET    https://app.testiny.io/api/v1/testcase/{id}
+    - PUT    https://app.testiny.io/api/v1/testcase/{id}
+    - DELETE https://app.testiny.io/api/v1/testcase/{id}
+    - POST   https://app.testiny.io/api/v1/testcase/mapping/bulk/{otherEntities}
+    - POST   https://app.testiny.io/api/v1/testcase/upload-attachment/{id}
+    - GET    https://app.testiny.io/api/v1/testcase-folder
+    - GET    https://app.testiny.io/api/v1/testcase-query
+    - GET    https://app.testiny.io/api/v1/testplan
+    - POST   https://app.testiny.io/api/v1/testplan
+    - POST   https://app.testiny.io/api/v1/testplan/find
+    - GET    https://app.testiny.io/api/v1/testplan/{id}
+    - GET    https://app.testiny.io/api/v1/testrun
+    - POST   https://app.testiny.io/api/v1/testrun
+    - POST   https://app.testiny.io/api/v1/testrun/find
+    - POST   https://app.testiny.io/api/v1/testrun/bulk
+    - GET    https://app.testiny.io/api/v1/testrun/{id}
+    - PUT    https://app.testiny.io/api/v1/testrun/{id}
+    - DELETE https://app.testiny.io/api/v1/testrun/{id}
+    - POST   https://app.testiny.io/api/v1/testrun/mapping/bulk/{otherEntities}
+    - POST   https://app.testiny.io/api/v1/testrun/upload-attachment/{trId}/{tcId}
+    - GET    https://app.testiny.io/api/v1/atm-testcase
+    - GET    https://app.testiny.io/api/v1/atm-testrun
+    - POST   https://app.testiny.io/api/v1/atm-testrun/complete
+    - GET    https://app.testiny.io/api/v1/export/testrun/csv
+    - GET    https://app.testiny.io/api/v1/export/testcase/csv
+sources:
+  - url: https://www.testiny.io/docs/
+    type: Documentation
+    note: Documentation home for the platform and API.
+  - url: https://www.testiny.io/docs/api-quickstart/
+    type: Documentation
+    note: Quickstart - base URL, X-Api-Key header, example requests, swagger.json location.
+  - url: https://www.testiny.io/docs/rest-api/testiny-api/
+    type: APIReference
+    note: Overall REST API structure and the per-entity CRUD/find/bulk/mapping pattern.
+  - url: https://www.testiny.io/docs/rest-api/test-run/
+    type: APIReference
+    note: TestRun endpoints, mappings, and result-attachment upload.
+  - url: https://www.testiny.io/docs/rest-api/test-case/
+    type: APIReference
+    note: TestCase endpoints and TestCaseFolder.
+  - url: https://app.testiny.io/api/v1/swagger.json
+    type: OpenAPI
+    note: Live OpenAPI 3.0.4 schema, 124 paths, ApiKeyAuth (X-Api-Key). No WebSocket/SSE surface.
+  - url: https://www.testiny.io/docs/mcp-server/
+    type: Documentation
+    note: MCP server over HTTP transport at /api-server; requires a paid or trial plan. Not a WebSocket.
+  - url: https://www.testiny.io/pricing/
+    type: Pricing
+    note: Per-seat plans (Free/Starter/Business/Enterprise/Custom Enterprise) with self-hosting on Custom Enterprise.
+actions:
+  asyncapiPath: null
+  apisYmlUpdated: true
+  reason: |
+    No WebSocket or other server-push transport exists on Testiny's own API.
+    The public surface is a documented request/response REST API with a live
+    OpenAPI schema, and the MCP server runs over HTTP transport. No AsyncAPI
+    document was created because there is nothing event-driven or bidirectional
+    on Testiny's API to model.

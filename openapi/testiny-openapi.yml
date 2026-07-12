@@ -1,0 +1,811 @@
+openapi: 3.0.4
+info:
+  title: Testiny API
+  description: >-
+    The Testiny API is the documented public REST API behind the Testiny test
+    management platform. It exposes the same resources you work with in the
+    Testiny app - projects, test cases (and test case folders and queries), test
+    plans, test runs, and automated test runs and results - over a consistent
+    REST pattern. Every entity supports single-item CRUD (GET/PUT/DELETE on
+    /{entity}/{id}, POST to create), search via POST /{entity}/find, bulk
+    create/update/delete via /{entity}/bulk, soft-delete/undelete, and
+    relationship management via POST /{entity}/mapping/bulk/{otherEntities}.
+    Test results are recorded by mapping test cases to a test run (a result
+    status per case, with optional per-step results and attachments). All
+    requests authenticate with an X-Api-Key header. This is a curated subset of
+    the full schema published at https://app.testiny.io/api/v1/swagger.json
+    (OpenAPI 3.0.4, 124 paths); consult the live schema for the complete
+    surface. Endpoint paths and the security scheme here are grounded in that
+    live schema; request/response bodies are modeled and simplified.
+  version: '1.38.0'
+  contact:
+    name: Testiny
+    url: https://www.testiny.io
+  license:
+    name: Proprietary
+    url: https://www.testiny.io/terms/
+servers:
+  - url: https://app.testiny.io/api/v1
+    description: Testiny API endpoint
+security:
+  - ApiKeyAuth: []
+tags:
+  - name: Projects
+    description: Top-level containers for test cases, plans, and runs.
+  - name: Test Cases
+    description: Manual and automated test cases, folders, and saved queries.
+  - name: Test Plans
+    description: Curated selections of test cases executed as runs.
+  - name: Test Runs
+    description: Executions of test cases with recorded results.
+  - name: Automation
+    description: Automated test cases and test runs submitted from CI/CD.
+paths:
+  /project:
+    get:
+      operationId: listProjects
+      tags: [Projects]
+      summary: List projects
+      description: Lists the projects in your organization.
+      responses:
+        '200':
+          description: A list of projects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /project/find:
+    post:
+      operationId: findProjects
+      tags: [Projects]
+      summary: Find projects
+      description: Search for projects using DataReadParams filters, ordering, and paging.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataReadParams'
+      responses:
+        '200':
+          description: Matching projects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /project/{id}:
+    get:
+      operationId: getProject
+      tags: [Projects]
+      summary: Get a project
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      responses:
+        '200':
+          description: The requested project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /permission/me/projects:
+    get:
+      operationId: listMyProjects
+      tags: [Projects]
+      summary: List projects I can access
+      description: Returns the projects the current API key has permission to access.
+      responses:
+        '200':
+          description: Accessible projects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /testcase:
+    get:
+      operationId: listTestCases
+      tags: [Test Cases]
+      summary: List test cases
+      responses:
+        '200':
+          description: A list of test cases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTestCase
+      tags: [Test Cases]
+      summary: Create a test case
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestCaseInput'
+      responses:
+        '200':
+          description: The created test case.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /testcase/find:
+    post:
+      operationId: findTestCases
+      tags: [Test Cases]
+      summary: Find test cases
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataReadParams'
+      responses:
+        '200':
+          description: Matching test cases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /testcase/bulk:
+    post:
+      operationId: bulkCreateTestCases
+      tags: [Test Cases]
+      summary: Bulk create test cases
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/TestCaseInput'
+      responses:
+        '200':
+          description: The created test cases.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+    put:
+      operationId: bulkUpdateTestCases
+      tags: [Test Cases]
+      summary: Bulk update test cases
+      responses:
+        '200':
+          description: The updated test cases.
+    delete:
+      operationId: bulkDeleteTestCases
+      tags: [Test Cases]
+      summary: Bulk delete test cases
+      responses:
+        '200':
+          description: Deletion result.
+  /testcase/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getTestCase
+      tags: [Test Cases]
+      summary: Get a test case
+      responses:
+        '200':
+          description: The requested test case.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateTestCase
+      tags: [Test Cases]
+      summary: Update a test case
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestCaseInput'
+      responses:
+        '200':
+          description: The updated test case.
+    delete:
+      operationId: deleteTestCase
+      tags: [Test Cases]
+      summary: Delete a test case
+      responses:
+        '200':
+          description: Deletion result.
+  /testcase/mapping/bulk/{otherEntities}:
+    post:
+      operationId: mapTestCases
+      tags: [Test Cases]
+      summary: Add/update/remove test case mappings
+      description: >-
+        Add, delete, or update mappings between test cases and other entities
+        (for example testcase:testrun). Use the op query parameter to select the
+        operation.
+      parameters:
+        - $ref: '#/components/parameters/OtherEntities'
+        - $ref: '#/components/parameters/MappingOp'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MappingRequest'
+      responses:
+        '200':
+          description: Mapping result.
+  /testcase/upload-attachment/{id}:
+    post:
+      operationId: uploadTestCaseAttachment
+      tags: [Test Cases]
+      summary: Upload an attachment to a test case
+      parameters:
+        - $ref: '#/components/parameters/Id'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: The stored attachment (blob).
+  /testcase-folder:
+    get:
+      operationId: listTestCaseFolders
+      tags: [Test Cases]
+      summary: List test case folders
+      responses:
+        '200':
+          description: A list of test case folders.
+    post:
+      operationId: createTestCaseFolder
+      tags: [Test Cases]
+      summary: Create a test case folder
+      responses:
+        '200':
+          description: The created folder.
+  /testcase-query:
+    get:
+      operationId: listTestCaseQueries
+      tags: [Test Cases]
+      summary: List saved test case queries
+      responses:
+        '200':
+          description: A list of saved queries.
+    post:
+      operationId: createTestCaseQuery
+      tags: [Test Cases]
+      summary: Create a saved test case query
+      responses:
+        '200':
+          description: The created query.
+  /testplan:
+    get:
+      operationId: listTestPlans
+      tags: [Test Plans]
+      summary: List test plans
+      responses:
+        '200':
+          description: A list of test plans.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+    post:
+      operationId: createTestPlan
+      tags: [Test Plans]
+      summary: Create a test plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestPlanInput'
+      responses:
+        '200':
+          description: The created test plan.
+  /testplan/find:
+    post:
+      operationId: findTestPlans
+      tags: [Test Plans]
+      summary: Find test plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataReadParams'
+      responses:
+        '200':
+          description: Matching test plans.
+  /testplan/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getTestPlan
+      tags: [Test Plans]
+      summary: Get a test plan
+      responses:
+        '200':
+          description: The requested test plan.
+    put:
+      operationId: updateTestPlan
+      tags: [Test Plans]
+      summary: Update a test plan
+      responses:
+        '200':
+          description: The updated test plan.
+    delete:
+      operationId: deleteTestPlan
+      tags: [Test Plans]
+      summary: Delete a test plan
+      responses:
+        '200':
+          description: Deletion result.
+  /testrun:
+    get:
+      operationId: listTestRuns
+      tags: [Test Runs]
+      summary: List test runs
+      description: Lists test runs in your organization.
+      responses:
+        '200':
+          description: A list of test runs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      operationId: createTestRun
+      tags: [Test Runs]
+      summary: Create a test run
+      description: Creates a new test run, optionally seeded from a test plan or set of test cases.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRunInput'
+      responses:
+        '200':
+          description: The created test run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /testrun/find:
+    post:
+      operationId: findTestRuns
+      tags: [Test Runs]
+      summary: Find test runs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataReadParams'
+      responses:
+        '200':
+          description: Matching test runs.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+  /testrun/bulk:
+    post:
+      operationId: bulkCreateTestRuns
+      tags: [Test Runs]
+      summary: Bulk create test runs
+      responses:
+        '200':
+          description: The created test runs.
+    put:
+      operationId: bulkUpdateTestRuns
+      tags: [Test Runs]
+      summary: Bulk update test runs
+      responses:
+        '200':
+          description: The updated test runs.
+    delete:
+      operationId: bulkDeleteTestRuns
+      tags: [Test Runs]
+      summary: Bulk delete test runs
+      responses:
+        '200':
+          description: Deletion result.
+  /testrun/{id}:
+    parameters:
+      - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getTestRun
+      tags: [Test Runs]
+      summary: Get a test run
+      responses:
+        '200':
+          description: The requested test run.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    put:
+      operationId: updateTestRun
+      tags: [Test Runs]
+      summary: Update a test run
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestRunInput'
+      responses:
+        '200':
+          description: The updated test run.
+    delete:
+      operationId: deleteTestRun
+      tags: [Test Runs]
+      summary: Delete a test run
+      responses:
+        '200':
+          description: Deletion result.
+  /testrun/mapping/bulk/{otherEntities}:
+    post:
+      operationId: mapTestRun
+      tags: [Test Runs]
+      summary: Record results by mapping test cases to a run
+      description: >-
+        Add, update, or remove mappings between a test run and other entities.
+        Mapping test cases to a run (testcase:testrun) is how per-case results
+        are recorded - each mapping carries a result status (for example passed,
+        failed, skipped, blocked) and can include per-step results.
+      parameters:
+        - $ref: '#/components/parameters/OtherEntities'
+        - $ref: '#/components/parameters/MappingOp'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ResultMappingRequest'
+      responses:
+        '200':
+          description: Mapping/result recording outcome.
+  /testrun/upload-attachment/{trId}/{tcId}:
+    post:
+      operationId: uploadTestRunResultAttachment
+      tags: [Test Runs]
+      summary: Upload an attachment to a test case result in a run
+      description: Upload blob data as an attachment to the given test case result in a given test run.
+      parameters:
+        - name: trId
+          in: path
+          required: true
+          description: The test run ID.
+          schema:
+            type: integer
+        - name: tcId
+          in: path
+          required: true
+          description: The test case ID.
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: The stored attachment (blob).
+  /atm-testcase:
+    get:
+      operationId: listAutomationTestCases
+      tags: [Automation]
+      summary: List automation test cases
+      responses:
+        '200':
+          description: A list of automation test cases.
+    post:
+      operationId: createAutomationTestCase
+      tags: [Automation]
+      summary: Create an automation test case
+      responses:
+        '200':
+          description: The created automation test case.
+  /atm-testrun:
+    get:
+      operationId: listAutomationTestRuns
+      tags: [Automation]
+      summary: List automation test runs
+      responses:
+        '200':
+          description: A list of automation test runs.
+    post:
+      operationId: createAutomationTestRun
+      tags: [Automation]
+      summary: Create an automation test run
+      description: Create an automation test run to collect results submitted from a CI/CD pipeline.
+      responses:
+        '200':
+          description: The created automation test run.
+  /atm-testrun/complete:
+    post:
+      operationId: completeAutomationTestRun
+      tags: [Automation]
+      summary: Complete an automation test run
+      description: Finalize an automation test run once all results have been submitted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationResults'
+      responses:
+        '200':
+          description: The completed automation test run.
+  /export/testrun/csv:
+    get:
+      operationId: exportTestRunsCsv
+      tags: [Test Runs]
+      summary: Export test runs as CSV
+      responses:
+        '200':
+          description: CSV export of test runs.
+          content:
+            text/csv:
+              schema:
+                type: string
+  /export/testcase/csv:
+    get:
+      operationId: exportTestCasesCsv
+      tags: [Test Cases]
+      summary: Export test cases as CSV
+      responses:
+        '200':
+          description: CSV export of test cases.
+          content:
+            text/csv:
+              schema:
+                type: string
+components:
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: >-
+        API key created in Testiny (Account settings / organization) with
+        fine-grained permissions. Passed as the X-Api-Key request header. Treat
+        the API key like a password.
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The numeric ID of the entity.
+      schema:
+        type: integer
+    OtherEntities:
+      name: otherEntities
+      in: path
+      required: true
+      description: The mapping type in entity:entity form, for example testcase:testrun.
+      schema:
+        type: string
+    MappingOp:
+      name: op
+      in: query
+      required: true
+      description: The mapping operation to perform.
+      schema:
+        type: string
+        enum:
+          - add
+          - delete
+          - update
+          - add_or_update
+  responses:
+    Unauthorized:
+      description: Missing or invalid X-Api-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+    Entity:
+      type: object
+      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+        project_id:
+          type: integer
+    EntityList:
+      type: object
+      properties:
+        meta:
+          type: object
+          additionalProperties: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+    DataReadParams:
+      type: object
+      description: >-
+        Query parameters for find endpoints - filtering, ordering, paging, and
+        nested mappings. Computed columns are prefixed with $.
+      additionalProperties: true
+      properties:
+        filter:
+          type: object
+          additionalProperties: true
+        idsOnly:
+          type: boolean
+        offset:
+          type: integer
+        limit:
+          type: integer
+        order:
+          type: array
+          items:
+            type: string
+    TestCaseInput:
+      type: object
+      required:
+        - project_id
+        - title
+      properties:
+        project_id:
+          type: integer
+        title:
+          type: string
+        precondition_text:
+          type: string
+        steps_text:
+          type: string
+        expected_result_text:
+          type: string
+        folder_id:
+          type: integer
+        priority:
+          type: string
+    TestPlanInput:
+      type: object
+      required:
+        - project_id
+        - title
+      properties:
+        project_id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+    TestRunInput:
+      type: object
+      required:
+        - project_id
+        - title
+      properties:
+        project_id:
+          type: integer
+        title:
+          type: string
+        testplan_id:
+          type: integer
+          description: Optional test plan to seed the run's test cases from.
+        description:
+          type: string
+    MappingRequest:
+      type: object
+      description: Bulk mapping payload between the primary entity and otherEntities.
+      properties:
+        mappings:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    ResultMappingRequest:
+      type: object
+      description: >-
+        Bulk testcase:testrun mapping payload used to record per-case results in
+        a run.
+      properties:
+        mappings:
+          type: array
+          items:
+            type: object
+            properties:
+              testcase_id:
+                type: integer
+              testrun_id:
+                type: integer
+              result_status:
+                type: string
+                description: The result for the test case in this run.
+                enum:
+                  - passed
+                  - failed
+                  - skipped
+                  - blocked
+                  - retest
+                  - inprogress
+                  - notrun
+              comment:
+                type: string
+              results_per_step:
+                type: array
+                items:
+                  type: object
+                  additionalProperties: true
+    AutomationResults:
+      type: object
+      description: Results payload submitted for an automation test run.
+      additionalProperties: true
+      properties:
+        atm_testrun_id:
+          type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              result_status:
+                type: string
+              duration_ms:
+                type: integer

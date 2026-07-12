@@ -1,0 +1,89 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Testiny
+providerId: testiny
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Test Runs
+- Test Management
+- QA
+- FinOps
+- Cost Management
+- FOCUS
+description: >-
+  FinOps view of Testiny spend. Testiny is a per-seat SaaS: cost is driven by the
+  number of user seats and the plan tier (Free up to 3 users, then Starter,
+  Business, and Enterprise at published per-user monthly rates), not by API
+  usage - the REST API, CLI, and npm package are included on every plan. The
+  primary cost levers are seat count, plan tier, monthly-vs-annual billing
+  (annual gives two months free), and storage consumed by attachments against
+  each plan's quota. Custom Enterprise adds invoice-based billing and an
+  on-premises self-hosting option (Testiny Server) whose cost shifts toward your
+  own infrastructure.
+notes: >-
+  Per-user rates are on the pricing page and change over time; verify during
+  reconciliation. There is no metered API charge - budget by seats and plan, and
+  watch storage against plan quotas.
+sources:
+- https://www.testiny.io/pricing/
+- https://www.testiny.io/docs/
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Testiny
+serviceCategory: Software Testing and Quality Assurance
+billingModel:
+  pricingCategory: Subscription-Based
+  billingFrequency: Monthly or Annual
+  billingCurrency: USD
+  chargeCategories:
+  - Usage
+  - Purchase
+focusColumns:
+  ServiceName: Testiny
+  ServiceCategory: Software Testing and Quality Assurance
+  ProviderName: Testiny
+  PublisherName: Testiny
+  InvoiceIssuerName: Testiny
+  BillingCurrency: USD
+  ChargeCategory: Usage
+  PricingCategory: Subscription-Based
+meters:
+- name: user_seats
+  description: Billable user seats per plan tier, the primary cost driver.
+  unit: users
+  aggregation: sum
+  dimensions:
+  - account
+  - plan
+- name: storage
+  description: Attachment/blob storage consumed against the plan's storage quota.
+  unit: bytes
+  aggregation: max
+  dimensions:
+  - account
+- name: plan_tier
+  description: Subscription tier (Free, Starter, Business, Enterprise, Custom Enterprise) setting per-seat rate and included features.
+  unit: tier
+  aggregation: max
+  dimensions:
+  - account
+principles:
+- name: Visibility
+  description: Track active user seats and plan tier per account; monitor storage consumption against the plan quota.
+- name: Allocation
+  description: Map seats to teams/projects so subscription cost maps to internal cost centers.
+- name: Optimization
+  description: Right-size seat count, choose annual billing for the two-months-free discount, prune unused attachments to stay under storage quota, and consider self-hosted Testiny Server for large or regulated deployments.
+- name: Accountability
+  description: Assign an owner for the Testiny subscription; review seats and tier against actual QA team usage each billing cycle.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

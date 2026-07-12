@@ -1,0 +1,65 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Testiny
+providerId: testiny
+created: '2026-07-11'
+modified: '2026-07-11'
+reconciled: false
+tags:
+- Test Runs
+- Test Management
+- QA
+- Rate Limiting
+- Quotas
+description: >-
+  Testiny does not publish fixed numeric request-rate limits for its REST API.
+  Practical limits are governed by plan-level resource caps rather than a
+  per-minute request ceiling - the Free tier caps combined test cases, plans,
+  runs, and executions at 1,000, and each plan sets a storage quota (50 GB on
+  Starter, 250 GB on Business, 500 GB on Enterprise) with a 100 MB per-file
+  upload limit for attachments. High-volume writes should use the bulk
+  endpoints (/{entity}/bulk) and the find endpoints' paging (offset/limit)
+  rather than many single-item calls.
+notes: >-
+  No per-account or per-endpoint numeric API rate limit is documented as of the
+  review date. Values here are modeled from the plan limits and upload limits on
+  the pricing page; verify on https://www.testiny.io/pricing/ and the API docs
+  during reconciliation.
+sources:
+- https://www.testiny.io/docs/
+- https://www.testiny.io/docs/rest-api/
+- https://www.testiny.io/pricing/
+responseCodes:
+  throttled: 429
+limits:
+- name: REST API Requests
+  scope: account
+  metric: requests
+  limit: not published
+  notes: No fixed numeric request-rate limit is documented for the Testiny REST API.
+- name: Free-Tier Items
+  scope: account
+  metric: items
+  limit: 1000 combined test cases, plans, runs, and executions
+  notes: Free plan caps total items; paid plans lift this cap.
+- name: Attachment Upload Size
+  scope: request
+  metric: bytes
+  limit: 100 MB per file
+  notes: Per-file upload limit for blob attachments across paid plans.
+- name: Storage Quota
+  scope: account
+  metric: bytes
+  limit: 50 GB (Starter) / 250 GB (Business) / 500 GB (Enterprise)
+  notes: Total attachment/blob storage per plan tier.
+policies:
+- name: Bulk Operations
+  description: Use /{entity}/bulk endpoints to create, update, or delete many entities in a single request instead of many single-item calls.
+- name: Paging
+  description: Use offset and limit in DataReadParams on find endpoints to page through large result sets.
+- name: Backoff Strategy
+  description: Clients should implement exponential backoff with jitter and honor Retry-After on any 429 responses.
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

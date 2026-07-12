@@ -1,0 +1,19 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/testiny-openapi.yml
+summary:
+  types:
+  - apiKey
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameterName: X-Api-Key
+  description: 'API key created in Testiny with fine-grained permissions scoped to your
+    organization. Passed as the `X-Api-Key` request header. The MCP server additionally
+    supports an `Authorization: Bearer <key>` header or browser-based OAuth. Treat the
+    API key like a password.'
+  sources:
+  - openapi/testiny-openapi.yml
+  - https://www.testiny.io/docs/api-quickstart/
+  - https://www.testiny.io/docs/mcp-server/

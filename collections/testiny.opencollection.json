@@ -1,0 +1,207 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Testiny API",
+    "version": "1.38.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "apikey": {
+        "key": "X-Api-Key",
+        "value": "{{apiKey}}",
+        "in": "header"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": { "name": "Projects", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List projects.", "type": "http" },
+          "http": { "method": "GET", "url": "https://app.testiny.io/api/v1/project" },
+          "docs": "Lists the projects in your organization."
+        },
+        {
+          "info": { "name": "Get a project.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/project/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The project ID." }
+            ]
+          },
+          "docs": "Retrieves a single project by ID."
+        },
+        {
+          "info": { "name": "List projects I can access.", "type": "http" },
+          "http": { "method": "GET", "url": "https://app.testiny.io/api/v1/permission/me/projects" },
+          "docs": "Returns the projects the current API key can access."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Test Cases", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List test cases.", "type": "http" },
+          "http": { "method": "GET", "url": "https://app.testiny.io/api/v1/testcase" },
+          "docs": "Lists test cases."
+        },
+        {
+          "info": { "name": "Create a test case.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase",
+            "body": { "type": "json", "data": "{\n  \"project_id\": 1,\n  \"title\": \"Login with valid credentials\"\n}" }
+          },
+          "docs": "Creates a new test case."
+        },
+        {
+          "info": { "name": "Find test cases.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase/find",
+            "body": { "type": "json", "data": "{\n  \"filter\": { \"project_id\": 1 },\n  \"limit\": 50\n}" }
+          },
+          "docs": "Searches for test cases using DataReadParams."
+        },
+        {
+          "info": { "name": "Get a test case.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testcase/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The test case ID." }
+            ]
+          },
+          "docs": "Retrieves a single test case by ID."
+        },
+        {
+          "info": { "name": "Update a test case.", "type": "http" },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.testiny.io/api/v1/testcase/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The test case ID." }
+            ],
+            "body": { "type": "json", "data": "{}" }
+          },
+          "docs": "Updates an existing test case."
+        },
+        {
+          "info": { "name": "Delete a test case.", "type": "http" },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.testiny.io/api/v1/testcase/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The test case ID." }
+            ]
+          },
+          "docs": "Soft-deletes a test case."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Test Plans", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List test plans.", "type": "http" },
+          "http": { "method": "GET", "url": "https://app.testiny.io/api/v1/testplan" },
+          "docs": "Lists test plans."
+        },
+        {
+          "info": { "name": "Create a test plan.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testplan",
+            "body": { "type": "json", "data": "{\n  \"project_id\": 1,\n  \"title\": \"Release 2.0 regression\"\n}" }
+          },
+          "docs": "Creates a new test plan."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Test Runs", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List test runs.", "type": "http" },
+          "http": { "method": "GET", "url": "https://app.testiny.io/api/v1/testrun" },
+          "docs": "Lists test runs."
+        },
+        {
+          "info": { "name": "Create a test run.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun",
+            "body": { "type": "json", "data": "{\n  \"project_id\": 1,\n  \"title\": \"Nightly smoke run\",\n  \"testplan_id\": 3\n}" }
+          },
+          "docs": "Creates a new test run, optionally seeded from a test plan."
+        },
+        {
+          "info": { "name": "Find test runs.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun/find",
+            "body": { "type": "json", "data": "{\n  \"filter\": { \"project_id\": 1 },\n  \"limit\": 50\n}" }
+          },
+          "docs": "Searches for test runs using DataReadParams."
+        },
+        {
+          "info": { "name": "Get a test run.", "type": "http" },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testrun/:id",
+            "params": [
+              { "name": "id", "value": "", "type": "path", "description": "The test run ID." }
+            ]
+          },
+          "docs": "Retrieves a single test run by ID."
+        },
+        {
+          "info": { "name": "Record results (map test cases to run).", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun/mapping/bulk/testcase:testrun?op=add_or_update",
+            "body": { "type": "json", "data": "{\n  \"mappings\": [\n    { \"testcase_id\": 100, \"testrun_id\": 5, \"result_status\": \"passed\" },\n    { \"testcase_id\": 101, \"testrun_id\": 5, \"result_status\": \"failed\" }\n  ]\n}" }
+          },
+          "docs": "Records per-case results in a run by mapping test cases to the run; each mapping carries a result status."
+        },
+        {
+          "info": { "name": "Export test runs as CSV.", "type": "http" },
+          "http": { "method": "GET", "url": "https://app.testiny.io/api/v1/export/testrun/csv" },
+          "docs": "Exports test runs as CSV."
+        }
+      ]
+    },
+    {
+      "info": { "name": "Automation", "type": "folder" },
+      "items": [
+        {
+          "info": { "name": "List automation test runs.", "type": "http" },
+          "http": { "method": "GET", "url": "https://app.testiny.io/api/v1/atm-testrun" },
+          "docs": "Lists automation test runs."
+        },
+        {
+          "info": { "name": "Create an automation test run.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/atm-testrun",
+            "body": { "type": "json", "data": "{\n  \"project_id\": 1,\n  \"title\": \"CI build #4211\"\n}" }
+          },
+          "docs": "Creates an automation test run to collect CI/CD results."
+        },
+        {
+          "info": { "name": "Complete an automation test run.", "type": "http" },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/atm-testrun/complete",
+            "body": { "type": "json", "data": "{\n  \"atm_testrun_id\": 42,\n  \"results\": []\n}" }
+          },
+          "docs": "Finalizes an automation test run after results are submitted."
+        }
+      ]
+    }
+  ]
+}

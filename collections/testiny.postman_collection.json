@@ -1,0 +1,274 @@
+{
+  "info": {
+    "name": "Testiny API",
+    "description": "The documented public REST API behind the Testiny test management platform. Base URL: https://app.testiny.io/api/v1. All requests authenticate with an X-Api-Key header. Endpoints cover projects, test cases, test plans, test runs (including result recording via testcase:testrun mappings), and automation test runs/results. Grounded in the live OpenAPI schema at https://app.testiny.io/api/v1/swagger.json.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      { "key": "key", "value": "X-Api-Key", "type": "string" },
+      { "key": "value", "value": "{{apiKey}}", "type": "string" },
+      { "key": "in", "value": "header", "type": "string" }
+    ]
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://app.testiny.io/api/v1", "type": "string" },
+    { "key": "apiKey", "value": "", "type": "string" }
+  ],
+  "item": [
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "List projects",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/project", "host": ["{{baseUrl}}"], "path": ["project"] },
+            "description": "Lists the projects in your organization."
+          }
+        },
+        {
+          "name": "Get a project",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/project/:id", "host": ["{{baseUrl}}"], "path": ["project", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single project by ID."
+          }
+        },
+        {
+          "name": "List projects I can access",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/permission/me/projects", "host": ["{{baseUrl}}"], "path": ["permission", "me", "projects"] },
+            "description": "Returns the projects the current API key can access."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Test Cases",
+      "item": [
+        {
+          "name": "List test cases",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/testcase", "host": ["{{baseUrl}}"], "path": ["testcase"] },
+            "description": "Lists test cases."
+          }
+        },
+        {
+          "name": "Create a test case",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"project_id\": 1,\n  \"title\": \"Login with valid credentials\",\n  \"precondition_text\": \"User account exists\",\n  \"steps_text\": \"Open login page and submit valid credentials\",\n  \"expected_result_text\": \"User is logged in\"\n}" },
+            "url": { "raw": "{{baseUrl}}/testcase", "host": ["{{baseUrl}}"], "path": ["testcase"] },
+            "description": "Creates a new test case."
+          }
+        },
+        {
+          "name": "Find test cases",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"filter\": { \"project_id\": 1 },\n  \"limit\": 50\n}" },
+            "url": { "raw": "{{baseUrl}}/testcase/find", "host": ["{{baseUrl}}"], "path": ["testcase", "find"] },
+            "description": "Searches for test cases using DataReadParams."
+          }
+        },
+        {
+          "name": "Get a test case",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/testcase/:id", "host": ["{{baseUrl}}"], "path": ["testcase", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single test case by ID."
+          }
+        },
+        {
+          "name": "Update a test case",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Login with valid credentials (updated)\"\n}" },
+            "url": { "raw": "{{baseUrl}}/testcase/:id", "host": ["{{baseUrl}}"], "path": ["testcase", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Updates an existing test case."
+          }
+        },
+        {
+          "name": "Delete a test case",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/testcase/:id", "host": ["{{baseUrl}}"], "path": ["testcase", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Soft-deletes a test case."
+          }
+        },
+        {
+          "name": "Upload a test case attachment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": { "mode": "formdata", "formdata": [{ "key": "file", "type": "file", "src": [] }] },
+            "url": { "raw": "{{baseUrl}}/testcase/upload-attachment/:id", "host": ["{{baseUrl}}"], "path": ["testcase", "upload-attachment", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Uploads blob data as an attachment to a test case."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Test Plans",
+      "item": [
+        {
+          "name": "List test plans",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/testplan", "host": ["{{baseUrl}}"], "path": ["testplan"] },
+            "description": "Lists test plans."
+          }
+        },
+        {
+          "name": "Create a test plan",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"project_id\": 1,\n  \"title\": \"Release 2.0 regression\"\n}" },
+            "url": { "raw": "{{baseUrl}}/testplan", "host": ["{{baseUrl}}"], "path": ["testplan"] },
+            "description": "Creates a new test plan."
+          }
+        },
+        {
+          "name": "Get a test plan",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/testplan/:id", "host": ["{{baseUrl}}"], "path": ["testplan", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single test plan by ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Test Runs",
+      "item": [
+        {
+          "name": "List test runs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/testrun", "host": ["{{baseUrl}}"], "path": ["testrun"] },
+            "description": "Lists test runs."
+          }
+        },
+        {
+          "name": "Create a test run",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"project_id\": 1,\n  \"title\": \"Nightly smoke run\",\n  \"testplan_id\": 3\n}" },
+            "url": { "raw": "{{baseUrl}}/testrun", "host": ["{{baseUrl}}"], "path": ["testrun"] },
+            "description": "Creates a new test run, optionally seeded from a test plan."
+          }
+        },
+        {
+          "name": "Find test runs",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"filter\": { \"project_id\": 1 },\n  \"limit\": 50\n}" },
+            "url": { "raw": "{{baseUrl}}/testrun/find", "host": ["{{baseUrl}}"], "path": ["testrun", "find"] },
+            "description": "Searches for test runs using DataReadParams."
+          }
+        },
+        {
+          "name": "Get a test run",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/testrun/:id", "host": ["{{baseUrl}}"], "path": ["testrun", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Retrieves a single test run by ID."
+          }
+        },
+        {
+          "name": "Update a test run",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"title\": \"Nightly smoke run (updated)\"\n}" },
+            "url": { "raw": "{{baseUrl}}/testrun/:id", "host": ["{{baseUrl}}"], "path": ["testrun", ":id"], "variable": [{ "key": "id", "value": "" }] },
+            "description": "Updates an existing test run."
+          }
+        },
+        {
+          "name": "Record results (map test cases to run)",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"mappings\": [\n    { \"testcase_id\": 100, \"testrun_id\": 5, \"result_status\": \"passed\" },\n    { \"testcase_id\": 101, \"testrun_id\": 5, \"result_status\": \"failed\", \"comment\": \"Assertion error on step 3\" }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/testrun/mapping/bulk/testcase:testrun?op=add_or_update", "host": ["{{baseUrl}}"], "path": ["testrun", "mapping", "bulk", "testcase:testrun"], "query": [{ "key": "op", "value": "add_or_update" }] },
+            "description": "Records per-case results in a run by mapping test cases to the run (each mapping carries a result status)."
+          }
+        },
+        {
+          "name": "Upload a result attachment",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": { "mode": "formdata", "formdata": [{ "key": "file", "type": "file", "src": [] }] },
+            "url": { "raw": "{{baseUrl}}/testrun/upload-attachment/:trId/:tcId", "host": ["{{baseUrl}}"], "path": ["testrun", "upload-attachment", ":trId", ":tcId"], "variable": [{ "key": "trId", "value": "" }, { "key": "tcId", "value": "" }] },
+            "description": "Uploads an attachment to a test case result in a run."
+          }
+        },
+        {
+          "name": "Export test runs as CSV",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/export/testrun/csv", "host": ["{{baseUrl}}"], "path": ["export", "testrun", "csv"] },
+            "description": "Exports test runs as CSV."
+          }
+        }
+      ]
+    },
+    {
+      "name": "Automation",
+      "item": [
+        {
+          "name": "List automation test runs",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": { "raw": "{{baseUrl}}/atm-testrun", "host": ["{{baseUrl}}"], "path": ["atm-testrun"] },
+            "description": "Lists automation test runs."
+          }
+        },
+        {
+          "name": "Create an automation test run",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"project_id\": 1,\n  \"title\": \"CI build #4211\"\n}" },
+            "url": { "raw": "{{baseUrl}}/atm-testrun", "host": ["{{baseUrl}}"], "path": ["atm-testrun"] },
+            "description": "Creates an automation test run to collect CI/CD results."
+          }
+        },
+        {
+          "name": "Complete an automation test run",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": { "mode": "raw", "raw": "{\n  \"atm_testrun_id\": 42,\n  \"results\": [\n    { \"name\": \"suite.spec.login\", \"result_status\": \"passed\", \"duration_ms\": 812 }\n  ]\n}" },
+            "url": { "raw": "{{baseUrl}}/atm-testrun/complete", "host": ["{{baseUrl}}"], "path": ["atm-testrun", "complete"] },
+            "description": "Finalizes an automation test run after results are submitted."
+          }
+        }
+      ]
+    }
+  ]
+}
