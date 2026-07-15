@@ -138,6 +138,8 @@ apis:
     (atm-testrun), submit results, and complete a run. Built for pushing framework
     output into Testiny and detecting flaky tests.
 common:
+- type: AgenticAccess
+  url: agentic-access/testiny-agentic-access.yml
 - type: DomainSecurity
   url: security/testiny-domain-security.yml
 - type: Authentication
