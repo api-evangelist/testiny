@@ -1,0 +1,154 @@
+openapi: 3.0.4
+info:
+  title: Testiny Automation Test Plans API
+  description: The Testiny API is the documented public REST API behind the Testiny test management platform. It exposes the same resources you work with in the Testiny app - projects, test cases (and test case folders and queries), test plans, test runs, and automated test runs and results - over a consistent REST pattern. Every entity supports single-item CRUD (GET/PUT/DELETE on /{entity}/{id}, POST to create), search via POST /{entity}/find, bulk create/update/delete via /{entity}/bulk, soft-delete/undelete, and relationship management via POST /{entity}/mapping/bulk/{otherEntities}. Test results are recorded by mapping test cases to a test run (a result status per case, with optional per-step results and attachments). All requests authenticate with an X-Api-Key header. This is a curated subset of the full schema published at https://app.testiny.io/api/v1/swagger.json (OpenAPI 3.0.4, 124 paths); consult the live schema for the complete surface. Endpoint paths and the security scheme here are grounded in that live schema; request/response bodies are modeled and simplified.
+  version: 1.38.0
+  contact:
+    name: Testiny
+    url: https://www.testiny.io
+  license:
+    name: Proprietary
+    url: https://www.testiny.io/terms/
+servers:
+- url: https://app.testiny.io/api/v1
+  description: Testiny API endpoint
+security:
+- ApiKeyAuth: []
+tags:
+- name: Test Plans
+  description: Curated selections of test cases executed as runs.
+paths:
+  /testplan:
+    get:
+      operationId: listTestPlans
+      tags:
+      - Test Plans
+      summary: List test plans
+      responses:
+        '200':
+          description: A list of test plans.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityList'
+    post:
+      operationId: createTestPlan
+      tags:
+      - Test Plans
+      summary: Create a test plan
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TestPlanInput'
+      responses:
+        '200':
+          description: The created test plan.
+  /testplan/find:
+    post:
+      operationId: findTestPlans
+      tags:
+      - Test Plans
+      summary: Find test plans
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DataReadParams'
+      responses:
+        '200':
+          description: Matching test plans.
+  /testplan/{id}:
+    parameters:
+    - $ref: '#/components/parameters/Id'
+    get:
+      operationId: getTestPlan
+      tags:
+      - Test Plans
+      summary: Get a test plan
+      responses:
+        '200':
+          description: The requested test plan.
+    put:
+      operationId: updateTestPlan
+      tags:
+      - Test Plans
+      summary: Update a test plan
+      responses:
+        '200':
+          description: The updated test plan.
+    delete:
+      operationId: deleteTestPlan
+      tags:
+      - Test Plans
+      summary: Delete a test plan
+      responses:
+        '200':
+          description: Deletion result.
+components:
+  schemas:
+    DataReadParams:
+      type: object
+      description: Query parameters for find endpoints - filtering, ordering, paging, and nested mappings. Computed columns are prefixed with $.
+      additionalProperties: true
+      properties:
+        filter:
+          type: object
+          additionalProperties: true
+        idsOnly:
+          type: boolean
+        offset:
+          type: integer
+        limit:
+          type: integer
+        order:
+          type: array
+          items:
+            type: string
+    Entity:
+      type: object
+      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+        project_id:
+          type: integer
+    TestPlanInput:
+      type: object
+      required:
+      - project_id
+      - title
+      properties:
+        project_id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+    EntityList:
+      type: object
+      properties:
+        meta:
+          type: object
+          additionalProperties: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+  parameters:
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The numeric ID of the entity.
+      schema:
+        type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key created in Testiny (Account settings / organization) with fine-grained permissions. Passed as the X-Api-Key request header. Treat the API key like a password.

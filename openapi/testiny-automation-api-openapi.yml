@@ -1,0 +1,97 @@
+openapi: 3.0.4
+info:
+  title: Testiny Automation API
+  description: The Testiny API is the documented public REST API behind the Testiny test management platform. It exposes the same resources you work with in the Testiny app - projects, test cases (and test case folders and queries), test plans, test runs, and automated test runs and results - over a consistent REST pattern. Every entity supports single-item CRUD (GET/PUT/DELETE on /{entity}/{id}, POST to create), search via POST /{entity}/find, bulk create/update/delete via /{entity}/bulk, soft-delete/undelete, and relationship management via POST /{entity}/mapping/bulk/{otherEntities}. Test results are recorded by mapping test cases to a test run (a result status per case, with optional per-step results and attachments). All requests authenticate with an X-Api-Key header. This is a curated subset of the full schema published at https://app.testiny.io/api/v1/swagger.json (OpenAPI 3.0.4, 124 paths); consult the live schema for the complete surface. Endpoint paths and the security scheme here are grounded in that live schema; request/response bodies are modeled and simplified.
+  version: 1.38.0
+  contact:
+    name: Testiny
+    url: https://www.testiny.io
+  license:
+    name: Proprietary
+    url: https://www.testiny.io/terms/
+servers:
+- url: https://app.testiny.io/api/v1
+  description: Testiny API endpoint
+security:
+- ApiKeyAuth: []
+tags:
+- name: Automation
+  description: Automated test cases and test runs submitted from CI/CD.
+paths:
+  /atm-testcase:
+    get:
+      operationId: listAutomationTestCases
+      tags:
+      - Automation
+      summary: List automation test cases
+      responses:
+        '200':
+          description: A list of automation test cases.
+    post:
+      operationId: createAutomationTestCase
+      tags:
+      - Automation
+      summary: Create an automation test case
+      responses:
+        '200':
+          description: The created automation test case.
+  /atm-testrun:
+    get:
+      operationId: listAutomationTestRuns
+      tags:
+      - Automation
+      summary: List automation test runs
+      responses:
+        '200':
+          description: A list of automation test runs.
+    post:
+      operationId: createAutomationTestRun
+      tags:
+      - Automation
+      summary: Create an automation test run
+      description: Create an automation test run to collect results submitted from a CI/CD pipeline.
+      responses:
+        '200':
+          description: The created automation test run.
+  /atm-testrun/complete:
+    post:
+      operationId: completeAutomationTestRun
+      tags:
+      - Automation
+      summary: Complete an automation test run
+      description: Finalize an automation test run once all results have been submitted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomationResults'
+      responses:
+        '200':
+          description: The completed automation test run.
+components:
+  schemas:
+    AutomationResults:
+      type: object
+      description: Results payload submitted for an automation test run.
+      additionalProperties: true
+      properties:
+        atm_testrun_id:
+          type: integer
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              name:
+                type: string
+              result_status:
+                type: string
+              duration_ms:
+                type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-Api-Key
+      description: API key created in Testiny (Account settings / organization) with fine-grained permissions. Passed as the X-Api-Key request header. Treat the API key like a password.
