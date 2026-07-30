@@ -13,7 +13,20 @@ description: Testiny is a modern test management platform for QA teams that keep
   (@testiny/cli), and offers an HTTP MCP server so AI assistants can manage test
   cases, runs, and results. Testiny is available as a hosted cloud service and, for
   Custom Enterprise, as self-hosted Testiny Server.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/testiny.png
 tags:
 - Test Runs
 - Test Management
@@ -26,117 +39,136 @@ created: '2026-07-11'
 modified: '2026-07-11'
 specificationVersion: '0.19'
 apis:
-- aid: testiny:testiny-test-runs-api
-  name: Testiny Test Runs API
-  tags:
-  - Test Runs
-  - Test Execution
-  - Results
-  - QA
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.testiny.io/docs/rest-api/test-run/
-  baseURL: https://app.testiny.io/api/v1
-  properties:
-  - url: https://www.testiny.io/docs/
-    type: Documentation
-  - url: https://www.testiny.io/docs/rest-api/test-run/
-    type: APIReference
-  - url: openapi/testiny-openapi.yml
-    type: OpenAPI
-  - url: collections/testiny.postman_collection.json
-    type: PostmanCollection
-  - url: collections/testiny.opencollection.json
-    type: OpenCollection
-  description: Create, read, update, delete, and search test runs, then record
-    results by mapping test cases to a run (result status per test case, with
-    per-step results and attachments). Covers the "test runs" workflow end to end -
-    spin up a run, execute its cases, and capture pass/fail outcomes and evidence.
-- aid: testiny:testiny-test-cases-api
-  name: Testiny Test Cases API
-  tags:
-  - Test Cases
-  - Test Management
-  - Folders
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.testiny.io/docs/rest-api/test-case/
-  baseURL: https://app.testiny.io/api/v1
-  properties:
-  - url: https://www.testiny.io/docs/rest-api/test-case/
-    type: APIReference
-  - url: openapi/testiny-openapi.yml
-    type: OpenAPI
-  - url: collections/testiny.postman_collection.json
-    type: PostmanCollection
-  - url: collections/testiny.opencollection.json
-    type: OpenCollection
-  description: Manage the manual and automated test cases that make up your test
-    library - create, get, update, delete, bulk-edit, and query test cases, organize
-    them into test case folders, save reusable test case queries, and upload
-    attachments to a case.
-- aid: testiny:testiny-test-plans-api
-  name: Testiny Test Plans API
-  tags:
-  - Test Plans
-  - Test Management
-  - Planning
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.testiny.io/docs/rest-api/test-plan/
-  baseURL: https://app.testiny.io/api/v1
-  properties:
-  - url: https://www.testiny.io/docs/rest-api/test-plan/
-    type: APIReference
-  - url: openapi/testiny-openapi.yml
-    type: OpenAPI
-  - url: collections/testiny.postman_collection.json
-    type: PostmanCollection
-  - url: collections/testiny.opencollection.json
-    type: OpenCollection
-  description: Create, get, update, delete, search, and bulk-manage test plans - the
-    curated selections of test cases that get executed as test runs - and map test
-    cases into a plan.
-- aid: testiny:testiny-projects-api
-  name: Testiny Projects API
-  tags:
-  - Projects
-  - Organization
-  - Test Management
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.testiny.io/docs/rest-api/
-  baseURL: https://app.testiny.io/api/v1
-  properties:
-  - url: https://www.testiny.io/docs/rest-api/
-    type: APIReference
-  - url: openapi/testiny-openapi.yml
-    type: OpenAPI
-  - url: collections/testiny.postman_collection.json
-    type: PostmanCollection
-  - url: collections/testiny.opencollection.json
-    type: OpenCollection
-  description: List and retrieve the projects that scope all test cases, plans, and
-    runs, and check the projects the current API key has permission to access. The
-    top-level container every other Testiny resource belongs to.
 - aid: testiny:testiny-automation-api
   name: Testiny Automation API
-  tags:
-  - Test Automation
-  - CI/CD
-  - Automated Test Runs
-  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  humanURL: https://www.testiny.io/docs/rest-api/automation-test-case/
+  description: Automated test cases and test runs submitted from CI/CD.
+  humanURL: https://www.testiny.io/docs/rest-api/test-run/
   baseURL: https://app.testiny.io/api/v1
+  tags:
+  - Automation
   properties:
-  - url: https://www.testiny.io/docs/rest-api/automation-test-case/
-    type: APIReference
-  - url: openapi/testiny-openapi.yml
-    type: OpenAPI
-  - url: collections/testiny.postman_collection.json
-    type: PostmanCollection
-  - url: collections/testiny.opencollection.json
-    type: OpenCollection
-  description: Submit and collect automated test runs and results from CI/CD -
-    manage automation test cases (atm-testcase) and automation test runs
-    (atm-testrun), submit results, and complete a run. Built for pushing framework
-    output into Testiny and detecting flaky tests.
+  - type: OpenAPI
+    url: openapi/testiny-automation-api-openapi.yml
+  - type: Documentation
+    url: https://www.testiny.io/docs/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-run/
+  - type: PostmanCollection
+    url: collections/testiny.postman_collection.json
+  - type: OpenCollection
+    url: collections/testiny.opencollection.json
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-case/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-plan/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/automation-test-case/
+- aid: testiny:testiny-projects-api
+  name: Testiny Projects API
+  description: Top-level containers for test cases, plans, and runs.
+  humanURL: https://www.testiny.io/docs/rest-api/test-run/
+  baseURL: https://app.testiny.io/api/v1
+  tags:
+  - Projects
+  properties:
+  - type: OpenAPI
+    url: openapi/testiny-projects-api-openapi.yml
+  - type: Documentation
+    url: https://www.testiny.io/docs/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-run/
+  - type: PostmanCollection
+    url: collections/testiny.postman_collection.json
+  - type: OpenCollection
+    url: collections/testiny.opencollection.json
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-case/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-plan/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/automation-test-case/
+- aid: testiny:testiny-test-cases-api
+  name: Testiny Test Cases API
+  description: Manual and automated test cases, folders, and saved queries.
+  humanURL: https://www.testiny.io/docs/rest-api/test-run/
+  baseURL: https://app.testiny.io/api/v1
+  tags:
+  - Test Cases
+  properties:
+  - type: OpenAPI
+    url: openapi/testiny-test-cases-api-openapi.yml
+  - type: Documentation
+    url: https://www.testiny.io/docs/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-run/
+  - type: PostmanCollection
+    url: collections/testiny.postman_collection.json
+  - type: OpenCollection
+    url: collections/testiny.opencollection.json
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-case/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-plan/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/automation-test-case/
+- aid: testiny:testiny-test-plans-api
+  name: Testiny Test Plans API
+  description: Curated selections of test cases executed as runs.
+  humanURL: https://www.testiny.io/docs/rest-api/test-run/
+  baseURL: https://app.testiny.io/api/v1
+  tags:
+  - Test Plans
+  properties:
+  - type: OpenAPI
+    url: openapi/testiny-test-plans-api-openapi.yml
+  - type: Documentation
+    url: https://www.testiny.io/docs/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-run/
+  - type: PostmanCollection
+    url: collections/testiny.postman_collection.json
+  - type: OpenCollection
+    url: collections/testiny.opencollection.json
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-case/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-plan/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/automation-test-case/
+- aid: testiny:testiny-test-runs-api
+  name: Testiny Test Runs API
+  description: Executions of test cases with recorded results.
+  humanURL: https://www.testiny.io/docs/rest-api/test-run/
+  baseURL: https://app.testiny.io/api/v1
+  tags:
+  - Test Runs
+  properties:
+  - type: OpenAPI
+    url: openapi/testiny-test-runs-api-openapi.yml
+  - type: Documentation
+    url: https://www.testiny.io/docs/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-run/
+  - type: PostmanCollection
+    url: collections/testiny.postman_collection.json
+  - type: OpenCollection
+    url: collections/testiny.opencollection.json
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-case/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/test-plan/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/
+  - type: APIReference
+    url: https://www.testiny.io/docs/rest-api/automation-test-case/
 common:
 - type: AgenticAccess
   url: agentic-access/testiny-agentic-access.yml
