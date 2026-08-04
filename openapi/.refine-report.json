@@ -1,0 +1,22 @@
+{
+  "provider": "testiny",
+  "sources": [
+    "testiny-automation-api-openapi.yml",
+    "testiny-projects-api-openapi.yml",
+    "testiny-test-cases-api-openapi.yml",
+    "testiny-test-plans-api-openapi.yml",
+    "testiny-test-runs-api-openapi.yml"
+  ],
+  "outputs": [
+    "testiny-automation-api-openapi.yml",
+    "testiny-projects-api-openapi.yml",
+    "testiny-test-cases-api-openapi.yml",
+    "testiny-test-plans-api-openapi.yml",
+    "testiny-test-runs-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
