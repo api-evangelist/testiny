@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Testiny Automation API",
+    "version": "1.38.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Automation",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List automation test cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/atm-testcase"
+          },
+          "docs": "List automation test cases"
+        },
+        {
+          "info": {
+            "name": "Create an automation test case",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/atm-testcase"
+          },
+          "docs": "Create an automation test case"
+        },
+        {
+          "info": {
+            "name": "List automation test runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/atm-testrun"
+          },
+          "docs": "List automation test runs"
+        },
+        {
+          "info": {
+            "name": "Create an automation test run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/atm-testrun"
+          },
+          "docs": "Create an automation test run to collect results submitted from a CI/CD pipeline."
+        },
+        {
+          "info": {
+            "name": "Complete an automation test run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/atm-testrun/complete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Finalize an automation test run once all results have been submitted."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,278 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Testiny Automation Test Cases API",
+    "version": "1.38.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Test Cases",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List test cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testcase"
+          },
+          "docs": "List test cases"
+        },
+        {
+          "info": {
+            "name": "Create a test case",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a test case"
+        },
+        {
+          "info": {
+            "name": "Find test cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase/find",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Find test cases"
+        },
+        {
+          "info": {
+            "name": "Bulk create test cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase/bulk",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Bulk create test cases"
+        },
+        {
+          "info": {
+            "name": "Bulk update test cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.testiny.io/api/v1/testcase/bulk"
+          },
+          "docs": "Bulk update test cases"
+        },
+        {
+          "info": {
+            "name": "Bulk delete test cases",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.testiny.io/api/v1/testcase/bulk"
+          },
+          "docs": "Bulk delete test cases"
+        },
+        {
+          "info": {
+            "name": "Get a test case",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testcase/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Get a test case"
+        },
+        {
+          "info": {
+            "name": "Update a test case",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.testiny.io/api/v1/testcase/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a test case"
+        },
+        {
+          "info": {
+            "name": "Delete a test case",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.testiny.io/api/v1/testcase/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Delete a test case"
+        },
+        {
+          "info": {
+            "name": "Add/update/remove test case mappings",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase/mapping/bulk/:otherEntities",
+            "params": [
+              {
+                "name": "otherEntities",
+                "value": "",
+                "type": "path",
+                "description": "The mapping type in entity:entity form, for example testcase:testrun."
+              },
+              {
+                "name": "op",
+                "value": "",
+                "type": "query",
+                "description": "The mapping operation to perform."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add, delete, or update mappings between test cases and other entities (for example testcase:testrun). Use the op query parameter to select the operation."
+        },
+        {
+          "info": {
+            "name": "Upload an attachment to a test case",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase/upload-attachment/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload an attachment to a test case"
+        },
+        {
+          "info": {
+            "name": "List test case folders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testcase-folder"
+          },
+          "docs": "List test case folders"
+        },
+        {
+          "info": {
+            "name": "Create a test case folder",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase-folder"
+          },
+          "docs": "Create a test case folder"
+        },
+        {
+          "info": {
+            "name": "List saved test case queries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testcase-query"
+          },
+          "docs": "List saved test case queries"
+        },
+        {
+          "info": {
+            "name": "Create a saved test case query",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testcase-query"
+          },
+          "docs": "Create a saved test case query"
+        },
+        {
+          "info": {
+            "name": "Export test cases as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/export/testcase/csv"
+          },
+          "docs": "Export test cases as CSV"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

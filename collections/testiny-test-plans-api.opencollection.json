@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Testiny Automation Test Plans API",
+    "version": "1.38.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Test Plans",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List test plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testplan"
+          },
+          "docs": "List test plans"
+        },
+        {
+          "info": {
+            "name": "Create a test plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testplan",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a test plan"
+        },
+        {
+          "info": {
+            "name": "Find test plans",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testplan/find",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Find test plans"
+        },
+        {
+          "info": {
+            "name": "Get a test plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testplan/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Get a test plan"
+        },
+        {
+          "info": {
+            "name": "Update a test plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.testiny.io/api/v1/testplan/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Update a test plan"
+        },
+        {
+          "info": {
+            "name": "Delete a test plan",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.testiny.io/api/v1/testplan/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Delete a test plan"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

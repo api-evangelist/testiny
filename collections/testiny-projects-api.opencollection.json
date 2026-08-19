@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Testiny Automation Projects API",
+    "version": "1.38.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Projects",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/project"
+          },
+          "docs": "Lists the projects in your organization."
+        },
+        {
+          "info": {
+            "name": "Find projects",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/project/find",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for projects using DataReadParams filters, ordering, and paging."
+        },
+        {
+          "info": {
+            "name": "Get a project",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/project/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Get a project"
+        },
+        {
+          "info": {
+            "name": "List projects I can access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/permission/me/projects"
+          },
+          "docs": "Returns the projects the current API key has permission to access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

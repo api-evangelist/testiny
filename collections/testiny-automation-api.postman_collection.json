@@ -1,0 +1,405 @@
+{
+  "item": [
+    {
+      "id": "2cc871ea-4171-49a9-891a-a45e28476708",
+      "name": "Automation",
+      "description": {
+        "content": "Automated test cases and test runs submitted from CI/CD.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5f0fb3a9-272f-4462-8bc8-13e35e6b6f2d",
+          "name": "List automation test cases",
+          "request": {
+            "name": "List automation test cases",
+            "description": {},
+            "url": {
+              "path": [
+                "atm-testcase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b93beaf4-0837-4143-b31f-4c4d51be91ed",
+              "name": "A list of automation test cases.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "atm-testcase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0775c2a8-2e5e-4a11-b640-a9da4918c2f3",
+          "name": "Create an automation test case",
+          "request": {
+            "name": "Create an automation test case",
+            "description": {},
+            "url": {
+              "path": [
+                "atm-testcase"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e5bba3d4-c0a6-4613-a3b1-f222097b228f",
+              "name": "The created automation test case.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "atm-testcase"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c6b14584-cd5f-4abf-8b85-cab9ff5fc347",
+          "name": "List automation test runs",
+          "request": {
+            "name": "List automation test runs",
+            "description": {},
+            "url": {
+              "path": [
+                "atm-testrun"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8a6ad53b-591c-4854-baea-929f910e0d55",
+              "name": "A list of automation test runs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "atm-testrun"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "18940f9b-7627-41c8-992e-0124cb338853",
+          "name": "Create an automation test run",
+          "request": {
+            "name": "Create an automation test run",
+            "description": {
+              "content": "Create an automation test run to collect results submitted from a CI/CD pipeline.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "atm-testrun"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "57ab5caf-7809-4ee0-b334-1d02f7d9e8ab",
+              "name": "The created automation test run.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "atm-testrun"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2540516b-cb2f-4984-bab3-def62b5c4757",
+          "name": "Complete an automation test run",
+          "request": {
+            "name": "Complete an automation test run",
+            "description": {
+              "content": "Finalize an automation test run once all results have been submitted.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "atm-testrun",
+                "complete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"atm_testrun_id\": \"<integer>\",\n  \"results\": [\n    {\n      \"name\": \"<string>\",\n      \"result_status\": \"<string>\",\n      \"duration_ms\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"result_status\": \"<string>\",\n      \"duration_ms\": \"<integer>\"\n    }\n  ],\n  \"key_0\": 8693\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56730018-375f-41cb-95e6-66791372a4b7",
+              "name": "The completed automation test run.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "atm-testrun",
+                    "complete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"atm_testrun_id\": \"<integer>\",\n  \"results\": [\n    {\n      \"name\": \"<string>\",\n      \"result_status\": \"<string>\",\n      \"duration_ms\": \"<integer>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"result_status\": \"<string>\",\n      \"duration_ms\": \"<integer>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.testiny.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2d0f6b02-9d8f-4fb8-a2fb-f0c093fd8200",
+    "name": "Testiny Automation API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Testiny API is the documented public REST API behind the Testiny test management platform. It exposes the same resources you work with in the Testiny app - projects, test cases (and test case folders and queries), test plans, test runs, and automated test runs and results - over a consistent REST pattern. Every entity supports single-item CRUD (GET/PUT/DELETE on /{entity}/{id}, POST to create), search via POST /{entity}/find, bulk create/update/delete via /{entity}/bulk, soft-delete/undelete, and relationship management via POST /{entity}/mapping/bulk/{otherEntities}. Test results are recorded by mapping test cases to a test run (a result status per case, with optional per-step results and attachments). All requests authenticate with an X-Api-Key header. This is a curated subset of the full schema published at https://app.testiny.io/api/v1/swagger.json (OpenAPI 3.0.4, 124 paths); consult the live schema for the complete surface. Endpoint paths and the security scheme here are grounded in that live schema; request/response bodies are modeled and simplified.\n\nContact Support:\n Name: Testiny",
+      "type": "text/plain"
+    }
+  }
+}

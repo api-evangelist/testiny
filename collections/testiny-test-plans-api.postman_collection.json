@@ -1,0 +1,551 @@
+{
+  "item": [
+    {
+      "id": "8cecbcda-375b-49bd-bb48-9a8bb4283a60",
+      "name": "Test Plans",
+      "description": {
+        "content": "Curated selections of test cases executed as runs.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "ec9bbe31-3bfd-4401-ab8a-c7293b3b20cb",
+          "name": "List test plans",
+          "request": {
+            "name": "List test plans",
+            "description": {},
+            "url": {
+              "path": [
+                "testplan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5b5f72a2-8931-4464-a7b1-5c104b667244",
+              "name": "A list of test plans.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testplan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"meta\": {\n    \"key_0\": 5882.06620092184,\n    \"key_1\": 5711.100749502546,\n    \"key_2\": \"string\",\n    \"key_3\": 4929.905872758526\n  },\n  \"data\": [\n    {\n      \"id\": 241,\n      \"project_id\": 4225\n    },\n    {\n      \"id\": 3133,\n      \"project_id\": 2337,\n      \"key_0\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c966a37-a36c-42e6-9338-75b8546fbc3e",
+          "name": "Create a test plan",
+          "request": {
+            "name": "Create a test plan",
+            "description": {},
+            "url": {
+              "path": [
+                "testplan"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"project_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "afe018be-2955-462b-8c17-4948d6249a9a",
+              "name": "The created test plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testplan"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"project_id\": \"<integer>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8e4fce6a-0e1e-4b8a-89ff-71c9227322f5",
+          "name": "Find test plans",
+          "request": {
+            "name": "Find test plans",
+            "description": {},
+            "url": {
+              "path": [
+                "testplan",
+                "find"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"filter\": {\n    \"key_0\": \"string\",\n    \"key_1\": \"string\",\n    \"key_2\": 8695\n  },\n  \"idsOnly\": \"<boolean>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"order\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_0\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d03e4038-e21b-4ce9-852b-56cdf103568b",
+              "name": "Matching test plans.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testplan",
+                    "find"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"filter\": {\n    \"key_0\": false,\n    \"key_1\": 4421\n  },\n  \"idsOnly\": \"<boolean>\",\n  \"offset\": \"<integer>\",\n  \"limit\": \"<integer>\",\n  \"order\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"key_0\": 9906.699638206179,\n  \"key_1\": true,\n  \"key_2\": 8921.123237767548\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8538b87c-9d23-41ce-8c0d-bdfc4259889a",
+          "name": "Get a test plan",
+          "request": {
+            "name": "Get a test plan",
+            "description": {},
+            "url": {
+              "path": [
+                "testplan",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The numeric ID of the entity."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f4e82846-1fa9-4b27-8c87-b289de4d7c77",
+              "name": "The requested test plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testplan",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric ID of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9287c737-d24a-47df-b933-637a1ff7513e",
+          "name": "Update a test plan",
+          "request": {
+            "name": "Update a test plan",
+            "description": {},
+            "url": {
+              "path": [
+                "testplan",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The numeric ID of the entity."
+                }
+              ]
+            },
+            "method": "PUT",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dcc94809-1a8c-4e82-8e64-ed5fbdef87e0",
+              "name": "The updated test plan.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testplan",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric ID of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "PUT",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a1964683-d795-4504-87af-dcf3ddc1ce94",
+          "name": "Delete a test plan",
+          "request": {
+            "name": "Delete a test plan",
+            "description": {},
+            "url": {
+              "path": [
+                "testplan",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "id",
+                  "description": "(Required) The numeric ID of the entity."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6a95d2c5-9896-4e2c-b277-51511bbf2fe6",
+              "name": "Deletion result.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "testplan",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "id",
+                      "description": "(Required) The numeric ID of the entity."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "X-Api-Key",
+                    "value": "<API Key>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://app.testiny.io/api/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "X-Api-Key"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "95a7251c-2ad5-472e-a458-f7a2e7152b88",
+    "name": "Testiny Automation Test Plans API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Testiny API is the documented public REST API behind the Testiny test management platform. It exposes the same resources you work with in the Testiny app - projects, test cases (and test case folders and queries), test plans, test runs, and automated test runs and results - over a consistent REST pattern. Every entity supports single-item CRUD (GET/PUT/DELETE on /{entity}/{id}, POST to create), search via POST /{entity}/find, bulk create/update/delete via /{entity}/bulk, soft-delete/undelete, and relationship management via POST /{entity}/mapping/bulk/{otherEntities}. Test results are recorded by mapping test cases to a test run (a result status per case, with optional per-step results and attachments). All requests authenticate with an X-Api-Key header. This is a curated subset of the full schema published at https://app.testiny.io/api/v1/swagger.json (OpenAPI 3.0.4, 124 paths); consult the live schema for the complete surface. Endpoint paths and the security scheme here are grounded in that live schema; request/response bodies are modeled and simplified.\n\nContact Support:\n Name: Testiny",
+      "type": "text/plain"
+    }
+  }
+}

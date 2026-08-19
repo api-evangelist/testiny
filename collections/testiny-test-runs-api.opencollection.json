@@ -1,0 +1,236 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Testiny Automation Test Runs API",
+    "version": "1.38.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-Api-Key",
+      "value": "{{X-Api-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Test Runs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List test runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testrun"
+          },
+          "docs": "Lists test runs in your organization."
+        },
+        {
+          "info": {
+            "name": "Create a test run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new test run, optionally seeded from a test plan or set of test cases."
+        },
+        {
+          "info": {
+            "name": "Find test runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun/find",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Find test runs"
+        },
+        {
+          "info": {
+            "name": "Bulk create test runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun/bulk"
+          },
+          "docs": "Bulk create test runs"
+        },
+        {
+          "info": {
+            "name": "Bulk update test runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.testiny.io/api/v1/testrun/bulk"
+          },
+          "docs": "Bulk update test runs"
+        },
+        {
+          "info": {
+            "name": "Bulk delete test runs",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.testiny.io/api/v1/testrun/bulk"
+          },
+          "docs": "Bulk delete test runs"
+        },
+        {
+          "info": {
+            "name": "Get a test run",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/testrun/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Get a test run"
+        },
+        {
+          "info": {
+            "name": "Update a test run",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.testiny.io/api/v1/testrun/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a test run"
+        },
+        {
+          "info": {
+            "name": "Delete a test run",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.testiny.io/api/v1/testrun/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "The numeric ID of the entity."
+              }
+            ]
+          },
+          "docs": "Delete a test run"
+        },
+        {
+          "info": {
+            "name": "Record results by mapping test cases to a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun/mapping/bulk/:otherEntities",
+            "params": [
+              {
+                "name": "otherEntities",
+                "value": "",
+                "type": "path",
+                "description": "The mapping type in entity:entity form, for example testcase:testrun."
+              },
+              {
+                "name": "op",
+                "value": "",
+                "type": "query",
+                "description": "The mapping operation to perform."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add, update, or remove mappings between a test run and other entities. Mapping test cases to a run (testcase:testrun) is how per-case results are recorded - each mapping carries a result status (for example passed, failed, skipped, blocked) and can include per-step results."
+        },
+        {
+          "info": {
+            "name": "Upload an attachment to a test case result in a run",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.testiny.io/api/v1/testrun/upload-attachment/:trId/:tcId",
+            "params": [
+              {
+                "name": "trId",
+                "value": "",
+                "type": "path",
+                "description": "The test run ID."
+              },
+              {
+                "name": "tcId",
+                "value": "",
+                "type": "path",
+                "description": "The test case ID."
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload blob data as an attachment to the given test case result in a given test run."
+        },
+        {
+          "info": {
+            "name": "Export test runs as CSV",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.testiny.io/api/v1/export/testrun/csv"
+          },
+          "docs": "Export test runs as CSV"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
