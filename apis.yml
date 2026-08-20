@@ -71,6 +71,8 @@ apis:
   humanURL: https://www.testiny.io/docs/rest-api/test-run/
   baseURL: https://app.testiny.io/api/v1
   tags:
+  - Project
+  tags_raw:
   - Projects
   properties:
   - type: OpenAPI
