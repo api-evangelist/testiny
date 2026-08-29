@@ -13,6 +13,18 @@ description: Testiny is a modern test management platform for QA teams that keep
   (@testiny/cli), and offers an HTTP MCP server so AI assistants can manage test
   cases, runs, and results. Testiny is available as a hosted cloud service and, for
   Custom Enterprise, as self-hosted Testiny Server.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: true
+  label: Hosted service · you call their endpoint
+  confidence: high
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: self-serve
