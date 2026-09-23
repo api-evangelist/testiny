@@ -1,11 +1,7 @@
 {
   "provider": "testiny",
   "sources": [
-    "testiny-automation-api-openapi.yml",
-    "testiny-projects-api-openapi.yml",
-    "testiny-test-cases-api-openapi.yml",
-    "testiny-test-plans-api-openapi.yml",
-    "testiny-test-runs-api-openapi.yml"
+    "_original/testiny-openapi.yml"
   ],
   "outputs": [
     "testiny-automation-api-openapi.yml",
@@ -17,6 +13,16 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "testiny-openapi.yml: upgraded openapi 3.0.4 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "testiny-automation-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "testiny-projects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "testiny-test-cases-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "testiny-test-plans-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "testiny-test-runs-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

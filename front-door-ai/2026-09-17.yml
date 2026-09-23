@@ -1,0 +1,30 @@
+# Front Door AI Index — testiny — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: testiny
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.testiny.io
+  final_host: www.testiny.io
+  ownership: own
+  owner: testiny
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 30
+  host_score: 30
+  density: 20.17
+  words: 1487
+  tiers:
+    agentic: 12
+    core: 16
+    model: 2
+  ambiguous: 8
+  top_terms:
+    AI: 16
+    automation: 8
+    MCP: 6
+    AI assistant: 4
+    Claude: 2
+    copilot: 2
