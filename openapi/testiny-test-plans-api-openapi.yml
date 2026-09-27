@@ -89,6 +89,18 @@ paths:
           description: Deletion result.
 components:
   schemas:
+    TestPlanInput:
+      type: object
+      required:
+      - project_id
+      - title
+      properties:
+        project_id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
     Entity:
       type: object
       description: A generic Testiny entity envelope. Concrete fields vary by entity type.
@@ -126,18 +138,6 @@ components:
           type: array
           items:
             type: string
-    TestPlanInput:
-      type: object
-      required:
-      - project_id
-      - title
-      properties:
-        project_id:
-          type: integer
-        title:
-          type: string
-        description:
-          type: string
   parameters:
     Id:
       name: id

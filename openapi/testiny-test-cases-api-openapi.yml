@@ -238,34 +238,17 @@ paths:
               schema:
                 type: string
 components:
-  parameters:
-    MappingOp:
-      name: op
-      in: query
-      required: true
-      description: The mapping operation to perform.
-      schema:
-        type: string
-        enum:
-        - add
-        - delete
-        - update
-        - add_or_update
-    OtherEntities:
-      name: otherEntities
-      in: path
-      required: true
-      description: The mapping type in entity:entity form, for example testcase:testrun.
-      schema:
-        type: string
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The numeric ID of the entity.
-      schema:
-        type: integer
   schemas:
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
     TestCaseInput:
       type: object
       required:
@@ -304,26 +287,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
-    EntityList:
-      type: object
-      properties:
-        meta:
-          type: object
-          additionalProperties: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entity'
     DataReadParams:
       type: object
       description: Query parameters for find endpoints - filtering, ordering, paging, and nested mappings. Computed columns are prefixed with $.
@@ -342,15 +305,52 @@ components:
           type: array
           items:
             type: string
+    EntityList:
+      type: object
+      properties:
+        meta:
+          type: object
+          additionalProperties: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+  parameters:
+    OtherEntities:
+      name: otherEntities
+      in: path
+      required: true
+      description: The mapping type in entity:entity form, for example testcase:testrun.
+      schema:
+        type: string
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The numeric ID of the entity.
+      schema:
+        type: integer
+    MappingOp:
+      name: op
+      in: query
+      required: true
+      description: The mapping operation to perform.
+      schema:
+        type: string
+        enum:
+        - add
+        - delete
+        - update
+        - add_or_update
   responses:
-    Unauthorized:
-      description: Missing or invalid X-Api-Key.
+    NotFound:
+      description: The requested resource was not found.
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
+    Unauthorized:
+      description: Missing or invalid X-Api-Key.
       content:
         application/json:
           schema:

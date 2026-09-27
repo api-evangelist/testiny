@@ -93,15 +93,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    Entity:
-      type: object
-      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
-      additionalProperties: true
-      properties:
-        id:
-          type: integer
-        project_id:
-          type: integer
     Error:
       type: object
       properties:
@@ -112,6 +103,15 @@ components:
               type: string
             message:
               type: string
+    Entity:
+      type: object
+      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+        project_id:
+          type: integer
     EntityList:
       type: object
       properties:
@@ -140,6 +140,19 @@ components:
           type: array
           items:
             type: string
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid X-Api-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   parameters:
     Id:
       name: id
@@ -148,19 +161,6 @@ components:
       description: The numeric ID of the entity.
       schema:
         type: integer
-  responses:
-    Unauthorized:
-      description: Missing or invalid X-Api-Key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
