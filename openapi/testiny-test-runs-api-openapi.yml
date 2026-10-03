@@ -204,22 +204,29 @@ paths:
               schema:
                 type: string
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid X-Api-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
-    TestRunInput:
+    Entity:
       type: object
-      required:
-      - project_id
-      - title
+      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
+      additionalProperties: true
       properties:
+        id:
+          type: integer
         project_id:
           type: integer
-        title:
-          type: string
-        testplan_id:
-          type: integer
-          description: Optional test plan to seed the run's test cases from.
-        description:
-          type: string
     Error:
       type: object
       properties:
@@ -230,43 +237,6 @@ components:
               type: string
             message:
               type: string
-    Entity:
-      type: object
-      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
-      additionalProperties: true
-      properties:
-        id:
-          type: integer
-        project_id:
-          type: integer
-    DataReadParams:
-      type: object
-      description: Query parameters for find endpoints - filtering, ordering, paging, and nested mappings. Computed columns are prefixed with $.
-      additionalProperties: true
-      properties:
-        filter:
-          type: object
-          additionalProperties: true
-        idsOnly:
-          type: boolean
-        offset:
-          type: integer
-        limit:
-          type: integer
-        order:
-          type: array
-          items:
-            type: string
-    EntityList:
-      type: object
-      properties:
-        meta:
-          type: object
-          additionalProperties: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entity'
     ResultMappingRequest:
       type: object
       description: Bulk testcase:testrun mapping payload used to record per-case results in a run.
@@ -298,6 +268,49 @@ components:
                 items:
                   type: object
                   additionalProperties: true
+    EntityList:
+      type: object
+      properties:
+        meta:
+          type: object
+          additionalProperties: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+    TestRunInput:
+      type: object
+      required:
+      - project_id
+      - title
+      properties:
+        project_id:
+          type: integer
+        title:
+          type: string
+        testplan_id:
+          type: integer
+          description: Optional test plan to seed the run's test cases from.
+        description:
+          type: string
+    DataReadParams:
+      type: object
+      description: Query parameters for find endpoints - filtering, ordering, paging, and nested mappings. Computed columns are prefixed with $.
+      additionalProperties: true
+      properties:
+        filter:
+          type: object
+          additionalProperties: true
+        idsOnly:
+          type: boolean
+        offset:
+          type: integer
+        limit:
+          type: integer
+        order:
+          type: array
+          items:
+            type: string
   parameters:
     OtherEntities:
       name: otherEntities
@@ -325,19 +338,6 @@ components:
         - delete
         - update
         - add_or_update
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid X-Api-Key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

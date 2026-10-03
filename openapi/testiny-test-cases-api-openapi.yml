@@ -238,7 +238,29 @@ paths:
               schema:
                 type: string
 components:
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid X-Api-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   schemas:
+    Entity:
+      type: object
+      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+        project_id:
+          type: integer
     Error:
       type: object
       properties:
@@ -249,6 +271,25 @@ components:
               type: string
             message:
               type: string
+    MappingRequest:
+      type: object
+      description: Bulk mapping payload between the primary entity and otherEntities.
+      properties:
+        mappings:
+          type: array
+          items:
+            type: object
+            additionalProperties: true
+    EntityList:
+      type: object
+      properties:
+        meta:
+          type: object
+          additionalProperties: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
     TestCaseInput:
       type: object
       required:
@@ -269,24 +310,6 @@ components:
           type: integer
         priority:
           type: string
-    Entity:
-      type: object
-      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
-      additionalProperties: true
-      properties:
-        id:
-          type: integer
-        project_id:
-          type: integer
-    MappingRequest:
-      type: object
-      description: Bulk mapping payload between the primary entity and otherEntities.
-      properties:
-        mappings:
-          type: array
-          items:
-            type: object
-            additionalProperties: true
     DataReadParams:
       type: object
       description: Query parameters for find endpoints - filtering, ordering, paging, and nested mappings. Computed columns are prefixed with $.
@@ -305,16 +328,6 @@ components:
           type: array
           items:
             type: string
-    EntityList:
-      type: object
-      properties:
-        meta:
-          type: object
-          additionalProperties: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entity'
   parameters:
     OtherEntities:
       name: otherEntities
@@ -342,19 +355,6 @@ components:
         - delete
         - update
         - add_or_update
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid X-Api-Key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
