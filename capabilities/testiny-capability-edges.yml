@@ -1,0 +1,53 @@
+slug: testiny
+provider: Testiny
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Test Cases
+  spec_file: testiny-test-cases-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.95
+  evidence: POST /testcase "Create a test case"; GET /testcase-folder "List test case folders"; schema
+    TestCaseInput
+  reason: Full CRUD and organisation of manual/automated test cases in a QA test management platform —
+    software quality engineering.
+- tag: Test Runs
+  spec_file: testiny-test-runs-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.95
+  evidence: POST /testrun/mapping/bulk/{otherEntities} "Record results by mapping test cases to a run";
+    GET /export/testrun/csv "Export test runs as CSV"
+  reason: Execution and result recording of test runs — core software quality engineering surface, not
+    generic job execution.
+- tag: Automation
+  spec_file: testiny-automation-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.9
+  evidence: GET /atm-testcase "List automation test cases"; POST /atm-testrun "Create an automation test
+    run"; schema AutomationResults
+  reason: Automated test case and test run management with results ingestion — automated test suite stewardship
+    within software quality engineering.
+- tag: Test Plans
+  spec_file: testiny-test-plans-api-openapi.yml
+  capability_id: BC-4200.50
+  capability_id_l1: BC-4200
+  capability_name: Software Quality Engineering
+  confidence: 0.9
+  evidence: POST /testplan "Create a test plan"; schema TestPlanInput
+  reason: Test plan lifecycle management in a QA test management platform — test strategy and suite stewardship.

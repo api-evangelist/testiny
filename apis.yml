@@ -185,6 +185,9 @@ apis:
   - type: APIReference
     url: https://www.testiny.io/docs/rest-api/automation-test-case/
 common:
+- type: CapabilityMap
+  url: capabilities/testiny-capability-edges.yml
+  name: Testiny Business Capability Map
 - type: AgenticAccess
   url: agentic-access/testiny-agentic-access.yml
 - type: DomainSecurity
