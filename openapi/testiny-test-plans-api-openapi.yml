@@ -101,15 +101,6 @@ components:
           type: string
         description:
           type: string
-    Entity:
-      type: object
-      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
-      additionalProperties: true
-      properties:
-        id:
-          type: integer
-        project_id:
-          type: integer
     EntityList:
       type: object
       properties:
@@ -138,6 +129,15 @@ components:
           type: array
           items:
             type: string
+    Entity:
+      type: object
+      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+        project_id:
+          type: integer
   parameters:
     Id:
       name: id

@@ -204,39 +204,59 @@ paths:
               schema:
                 type: string
 components:
-  responses:
-    NotFound:
-      description: The requested resource was not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
-    Unauthorized:
-      description: Missing or invalid X-Api-Key.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Error'
+  parameters:
+    MappingOp:
+      name: op
+      in: query
+      required: true
+      description: The mapping operation to perform.
+      schema:
+        type: string
+        enum:
+        - add
+        - delete
+        - update
+        - add_or_update
+    OtherEntities:
+      name: otherEntities
+      in: path
+      required: true
+      description: The mapping type in entity:entity form, for example testcase:testrun.
+      schema:
+        type: string
+    Id:
+      name: id
+      in: path
+      required: true
+      description: The numeric ID of the entity.
+      schema:
+        type: integer
   schemas:
-    Entity:
+    EntityList:
       type: object
-      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
-      additionalProperties: true
       properties:
-        id:
-          type: integer
+        meta:
+          type: object
+          additionalProperties: true
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Entity'
+    TestRunInput:
+      type: object
+      required:
+      - project_id
+      - title
+      properties:
         project_id:
           type: integer
-    Error:
-      type: object
-      properties:
-        error:
-          type: object
-          properties:
-            code:
-              type: string
-            message:
-              type: string
+        title:
+          type: string
+        testplan_id:
+          type: integer
+          description: Optional test plan to seed the run's test cases from.
+        description:
+          type: string
     ResultMappingRequest:
       type: object
       description: Bulk testcase:testrun mapping payload used to record per-case results in a run.
@@ -268,31 +288,6 @@ components:
                 items:
                   type: object
                   additionalProperties: true
-    EntityList:
-      type: object
-      properties:
-        meta:
-          type: object
-          additionalProperties: true
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Entity'
-    TestRunInput:
-      type: object
-      required:
-      - project_id
-      - title
-      properties:
-        project_id:
-          type: integer
-        title:
-          type: string
-        testplan_id:
-          type: integer
-          description: Optional test plan to seed the run's test cases from.
-        description:
-          type: string
     DataReadParams:
       type: object
       description: Query parameters for find endpoints - filtering, ordering, paging, and nested mappings. Computed columns are prefixed with $.
@@ -311,33 +306,38 @@ components:
           type: array
           items:
             type: string
-  parameters:
-    OtherEntities:
-      name: otherEntities
-      in: path
-      required: true
-      description: The mapping type in entity:entity form, for example testcase:testrun.
-      schema:
-        type: string
-    Id:
-      name: id
-      in: path
-      required: true
-      description: The numeric ID of the entity.
-      schema:
-        type: integer
-    MappingOp:
-      name: op
-      in: query
-      required: true
-      description: The mapping operation to perform.
-      schema:
-        type: string
-        enum:
-        - add
-        - delete
-        - update
-        - add_or_update
+    Error:
+      type: object
+      properties:
+        error:
+          type: object
+          properties:
+            code:
+              type: string
+            message:
+              type: string
+    Entity:
+      type: object
+      description: A generic Testiny entity envelope. Concrete fields vary by entity type.
+      additionalProperties: true
+      properties:
+        id:
+          type: integer
+        project_id:
+          type: integer
+  responses:
+    NotFound:
+      description: The requested resource was not found.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    Unauthorized:
+      description: Missing or invalid X-Api-Key.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
