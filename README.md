@@ -1,4 +1,4 @@
-# Testiny (testiny)
+# Testiny
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,151 +64,126 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Testiny is a modern test management platform for QA teams that keeps manual and automated test cases, test plans, test runs, and results in a single place, with reporting and integrations for Jira, GitLab, and GitHub. Everything in the product is backed by a documented REST API (base `https://app.testiny.io/api/v1`, authenticated with an `X-Api-Key` header) that exposes projects, test cases, test case folders, test plans, test runs, and automated test runs and results over a consistent CRUD / find / bulk / mapping pattern. Testiny publishes a live OpenAPI schema at `https://app.testiny.io/api/v1/swagger.json`, ships a CLI and npm package (`@testiny/cli`), and offers an HTTP MCP server so AI assistants can manage test cases, runs, and results.
+Testiny is a modern test management platform for QA teams that keeps manual and automated test cases, test plans, test runs, and results in a single place, with reporting and integrations for Jira, GitLab, and GitHub. Everything in the product is backed by a documented REST API (base https://app.testiny.io/api/v1, authenticated with an X-Api-Key header) that exposes projects, test cases, test case folders, test plans, test runs, and automated test runs and results over a consistent CRUD/find/bulk/mapping pattern. Testiny publishes an OpenAPI schema at https://app.testiny.io/api/v1/swagger.json, ships a CLI and npm package (@testiny/cli), and offers an HTTP MCP server so AI assistants can manage test cases, runs, and results. Testiny is available as a hosted cloud service and, for Custom Enterprise, as self-hosted Testiny Server.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/testiny/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/testiny/refs/heads/main/apis.yml)
+**Areas:** Test Runs · Test Management · QA · Test Cases · Test Automation · Quality Assurance · Testing
 
-## Access Model (honest summary)
+## Testiny on APIs.io
 
-- **Public, documented REST API.** Real and live: base `https://app.testiny.io/api/v1`, OpenAPI 3.0.4 schema at `https://app.testiny.io/api/v1/swagger.json` (124 paths), authenticated with an `X-Api-Key` header. Endpoint paths and the auth scheme in this repo are grounded in that live schema.
-- **Per-seat SaaS, not open source.** A free-forever tier (up to 3 users, 1,000 combined items) plus paid Starter, Business, and Enterprise tiers. Custom Enterprise adds invoice billing and self-hosting via **Testiny Server**.
-- **API is included on every plan.** The REST API, CLI, and npm package are available on all tiers (API keys are a Free-tier feature). The **MCP server** requires a paid or trial plan.
-- **No public WebSocket / SSE.** The public surface is request/response REST. The MCP server uses HTTP transport (not a WebSocket). See `review.yml`.
-- **Modeled vs. sourced.** Endpoint paths, base URL, auth, and pricing are grounded in Testiny's live docs, OpenAPI schema, and pricing page. Request/response bodies in `openapi/testiny-openapi.yml` are simplified/modeled from the entity pattern; consult the live `swagger.json` for the complete, authoritative schema. Rate limits are modeled from plan/upload limits (Testiny does not publish numeric request-rate limits).
+Everything profiled for Testiny is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/testiny/](https://apis.io/providers/testiny/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (5)
 
-- Test Runs
-- Test Management
-- QA
-- Test Cases
-- Test Automation
-- Quality Assurance
-- Testing
+- [Testiny Automation API](https://apis.io/apis/testiny/testiny-automation-api/) — Automated test cases and test runs submitted from CI/CD.
+- [Testiny Projects API](https://apis.io/apis/testiny/testiny-projects-api/) — Top-level containers for test cases, plans, and runs.
+- [Testiny Test Cases API](https://apis.io/apis/testiny/testiny-test-cases-api/) — Manual and automated test cases, folders, and saved queries.
+- [Testiny Test Plans API](https://apis.io/apis/testiny/testiny-test-plans-api/) — Curated selections of test cases executed as runs.
+- [Testiny Test Runs API](https://apis.io/apis/testiny/testiny-test-runs-api/) — Executions of test cases with recorded results.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-07-11
-- **Modified:** 2026-07-11
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### Agentic access (1)
 
-### Testiny Test Runs API
+Which operations an agent can call, which act, and which need a human in the loop.
 
-Create, read, update, delete, and search test runs, then record results by mapping test cases to a run (result status per test case, with per-step results and attachments). Covers the "test runs" workflow end to end - spin up a run, execute its cases, and capture pass/fail outcomes and evidence.
+- [Testiny Agentic Access](https://apis.io/agentic-access/testiny/testiny-agentic-access/)
 
-- **Human URL:** [https://www.testiny.io/docs/rest-api/test-run/](https://www.testiny.io/docs/rest-api/test-run/)
-- **Base URL:** `https://app.testiny.io/api/v1`
+#### Collections (6)
 
-#### Tags
+Postman and Open Collection request collections.
 
-- Test Runs
-- Test Execution
-- Results
-- QA
+- [Testiny API](https://apis.io/collections/testiny/open-testiny/)
+- [Testiny Automation API](https://apis.io/collections/testiny/open-testiny-automation-api/)
+- [Testiny Automation Projects API](https://apis.io/collections/testiny/open-testiny-projects-api/)
+- [Testiny Automation Test Cases API](https://apis.io/collections/testiny/open-testiny-test-cases-api/)
+- [Testiny Automation Test Plans API](https://apis.io/collections/testiny/open-testiny-test-plans-api/)
+- [Testiny Automation Test Runs API](https://apis.io/collections/testiny/open-testiny-test-runs-api/)
 
-#### Properties
+#### Security (2)
 
-- [Documentation](https://www.testiny.io/docs/)
-- [API Reference](https://www.testiny.io/docs/rest-api/test-run/)
-- [OpenAPI](openapi/testiny-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/testiny.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/testiny.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Authentication, trust centre, and vulnerability disclosure.
 
-### Testiny Test Cases API
+- [Testiny Authentication](https://apis.io/security/testiny/testiny-authentication/)
+- [Testiny Domain Security](https://apis.io/security/testiny/testiny-domain-security/)
 
-Manage the manual and automated test cases that make up your test library - create, get, update, delete, bulk-edit, and query test cases, organize them into test case folders, save reusable test case queries, and upload attachments to a case.
+#### Plans and pricing (1)
 
-- **Human URL:** [https://www.testiny.io/docs/rest-api/test-case/](https://www.testiny.io/docs/rest-api/test-case/)
-- **Base URL:** `https://app.testiny.io/api/v1`
+Published plans, tiers and prices.
 
-#### Tags
+- [Testiny Plans Pricing](https://apis.io/plans/testiny/testiny-plans-pricing/)
 
-- Test Cases
-- Test Management
-- Folders
+#### Rate limits (1)
 
-#### Properties
+Published request limits.
 
-- [API Reference](https://www.testiny.io/docs/rest-api/test-case/)
-- [OpenAPI](openapi/testiny-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/testiny.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/testiny.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Testiny Rate Limits](https://apis.io/rate-limits/testiny/testiny-rate-limits/)
 
-### Testiny Test Plans API
+#### FinOps (1)
 
-Create, get, update, delete, search, and bulk-manage test plans - the curated selections of test cases that get executed as test runs - and map test cases into a plan.
+What the API costs to run, by operation.
 
-- **Human URL:** [https://www.testiny.io/docs/rest-api/test-plan/](https://www.testiny.io/docs/rest-api/test-plan/)
-- **Base URL:** `https://app.testiny.io/api/v1`
+- [Testiny Finops](https://apis.io/finops/testiny/testiny-finops/)
 
-#### Tags
+## Where to find this API
 
-- Test Plans
-- Test Management
-- Planning
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
-#### Properties
-
-- [API Reference](https://www.testiny.io/docs/rest-api/test-plan/)
-- [OpenAPI](openapi/testiny-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/testiny.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/testiny.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Testiny Projects API
-
-List and retrieve the projects that scope all test cases, plans, and runs, and check the projects the current API key has permission to access. The top-level container every other Testiny resource belongs to.
-
-- **Human URL:** [https://www.testiny.io/docs/rest-api/](https://www.testiny.io/docs/rest-api/)
-- **Base URL:** `https://app.testiny.io/api/v1`
-
-#### Tags
-
-- Projects
-- Organization
-- Test Management
-
-#### Properties
-
-- [API Reference](https://www.testiny.io/docs/rest-api/)
-- [OpenAPI](openapi/testiny-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/testiny.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/testiny.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### Testiny Automation API
-
-Submit and collect automated test runs and results from CI/CD - manage automation test cases (`atm-testcase`) and automation test runs (`atm-testrun`), submit results, and complete a run. Built for pushing framework output into Testiny and detecting flaky tests.
-
-- **Human URL:** [https://www.testiny.io/docs/rest-api/automation-test-case/](https://www.testiny.io/docs/rest-api/automation-test-case/)
-- **Base URL:** `https://app.testiny.io/api/v1`
-
-#### Tags
-
-- Test Automation
-- CI/CD
-- Automated Test Runs
-
-#### Properties
-
-- [API Reference](https://www.testiny.io/docs/rest-api/automation-test-case/)
-- [OpenAPI](openapi/testiny-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/testiny.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/testiny.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
-
-- [Domain Security](security/testiny-domain-security.yml)
-- [Authentication](authentication/testiny-authentication.yml)
-- [LinkedIn](https://www.linkedin.com/company/testiny)
 - [Website](https://www.testiny.io)
 - [Documentation](https://www.testiny.io/docs/)
-- [Sign Up](https://app.testiny.io/)
-- [Plans](plans/testiny-plans-pricing.yml)
 - [Pricing](https://www.testiny.io/pricing/)
-- [Rate Limits](rate-limits/testiny-rate-limits.yml)
-- [Fin Ops](finops/testiny-finops.yml)
+- [Sign up](https://app.testiny.io/)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 28.0** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 66.1 |
+| Contract quality | 47.5 |
+| Contract governance | 0.0 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 29.8 |
+| Access clarity | 18.4 |
+
+**Agent readiness 17.9** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 11.8** — Horizontal (data, software, accessibility, platform)
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/testiny/](https://apis.io/providers/testiny/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Testiny: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/testiny/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
